@@ -1,0 +1,52 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.example.loginsignup_new"
+    compileSdk = 34  // تحديث compileSdk إلى 34
+
+    defaultConfig {
+        applicationId = "com.example.loginsignup_new"
+        minSdk = 21  // الحد الأدنى لإصدار Android المدعوم
+        targetSdk = 34 // تحديث targetSdk إلى 34
+        versionCode = 1
+        versionName = "1.0"
+    }
+
+    compileOptions {
+        coreLibraryDesugaringEnabled true  // تمكين desugaring لدعم Java 17
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("C:\\Users\\eng\\my_flutter_app\\my-release-key.jks")  // المسار إلى keystore
+            storePassword "197800aa"  // كلمة مرور keystore
+            keyAlias "my-key-alias"  // الاسم المستعار للمفتاح
+            keyPassword "197800aa"  // كلمة مرور المفتاح
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release  // استخدام التوقيع الخاص بالـ release
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.22"
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
+}
